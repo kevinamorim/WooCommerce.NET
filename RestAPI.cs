@@ -241,12 +241,7 @@ namespace WooCommerceNET
                             httpWebRequest.ContentType = "application/x-www-form-urlencoded";
 
                             Stream dataStream = await httpWebRequest.GetRequestStreamAsync().ConfigureAwait(false);
-
-                            // If the given path is a physical path, open file. If not, read from URL.
-                            var fileStream = parms["source"] == "local" ?
-                                new FileStream(parms["path"], FileMode.Open, FileAccess.Read) :
-                                (new WebClient()).OpenRead(parms["path"]);
-
+                            FileStream fileStream = new FileStream(parms["path"], FileMode.Open, FileAccess.Read);
                             byte[] buffer = new byte[4096];
                             int bytesRead = 0;
 
